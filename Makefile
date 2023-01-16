@@ -1,20 +1,15 @@
 # - * - Makefile - * -
 
-SRCS = main.c
+SRCS = main.c put_pixel.c put_square.c close_game.c
 
 OBJS = $(SRCS:%.c=%.o)
 
-NAME = so_long
+NAME = so_long.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
-OBJ_DIR = objs
 
 all: $(NAME)
-
-$(OBJ_DIR)/%.o: %.c
-	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
 	@ar -rcs $(NAME) $(OBJS)
@@ -33,6 +28,4 @@ fclean: clean
 re: fclean $(NAME)
 	@$(MAKE) -C libft re
 
-.PHONY: all clean fclean recd
-
-#gcc -I /nfs/homes/ddiniz-m/Documents/so_long/mlx_linux main.c -L /nfs/homes/ddiniz-m/Documents/so_long/mlx_linux/mlx -lmlx -lXext -lX11
+.PHONY: all clean fclean re
