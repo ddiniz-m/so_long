@@ -5,13 +5,17 @@
 # include "ft_printf/ft_printf.h"
 # include "libft/libft.h"
 # include "mlx_linux/mlx.h"
-# include "mlx_linux/mlx_int.h"
 
-typedef struct s_window
+typedef struct s_game
 {
 	void	*mlx;
 	void	*win;
-}			t_window;
+}			t_game;
+
+/* typedef struct s_tiles
+{
+	
+}			t_tiles; */
 
 typedef struct s_image
 {
@@ -22,8 +26,8 @@ typedef struct s_image
 	int		endian;
 }			t_image;
 
-int		close_game(int keycode, t_window *window);
-void		put_square(t_image *image, int side, int startx, int starty);
+void	put_square(t_image *image, int side, int startx, int starty);
 void	put_pixel(t_image *image, int x, int y, int color);
+int close_game(int keycode, t_game *game);
 
 #endif
