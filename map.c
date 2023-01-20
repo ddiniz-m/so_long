@@ -3,42 +3,37 @@
 int map_lines(int fd)
 {
 	int i;
-	static char buf[2];
+	static char buf[1];
 
 	i = 0;
-	while ()
+	while (read(fd, buf, 1) > 0)
 	{
-		read(fd, buf, 1);
 		printf("%s", buf);
 		if (*buf == '\n')
 			i++;
 	}
-	printf("\ni = %d\n", i);
+	i++;
+	printf("\n");
 	return(i);
 }
 
-char **map(int j)
+char **map(char *ber_file)
 {
 	int i;
+	int j;
 	int fd;
 	char **map;
-
-	fd = open("test.ber", O_RDONLY);
+	j = 0;
+	fd = open(ber_file, O_RDONLY);
 	i = map_lines(fd);
 	map = malloc(sizeof(char *) * (i + 1));
+	fd = open(ber_file, O_RDONLY);
+	printf("i = %d\n", i);
 	while (j <= i)
 	{
 		map[j] = get_next_line(fd);
+		printf("line %d : %s", j, map[j]);
 		j++;
-		printf("line %d : %s\n", j, map[j]);
 	}
 	return(map);
-}
-
-int main()
-{
-	char **test;
-	test = map(0);
-	(void) test;
-	return(0);
 }
