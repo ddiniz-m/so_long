@@ -1,7 +1,7 @@
 /* XPM */
-static char * sea_xpm[] = {
+static char * land_xpm[] = {
 "64 64 1 1",
-" 	c #0B9BD6",
+" 	c #25A84F",
 "                                                                ",
 "                                                                ",
 "                                                                ",

@@ -9,7 +9,7 @@ int		mlx_loop_hook(void *mlx_ptr, int (*funct_ptr)(), void *param);
 void	*mlx_xpm_file_to_image(t_xvar *xvar,char *file,int *width,int *height); */
 
 
-int	key_hook(int keycode, t_game *win)
+/* int	key_hook(int keycode, t_game *win)
 {
 	t_game game;
 	t_image image;
@@ -24,7 +24,7 @@ int	key_hook(int keycode, t_game *win)
 	}
 	(void)win;
 	return(0);
-}
+} */
 
 /* int render_next_frame(void *my_struct)
 {
@@ -36,12 +36,15 @@ int	key_hook(int keycode, t_game *win)
 
 int	main(void)
 {
-	
 	t_game game;
 	t_image image;
 	int win_size = 640;
 	int tile_size = 64;
 	char *path = "/nfs/homes/ddiniz-m/Documents/so_long/sea.xpm";
+	char **tile_map;
+
+	tile_map = map("test.ber");
+	(void)tile_map;
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, win_size, win_size, "so_long");
 	image.img = mlx_xpm_file_to_image(game.mlx, path, &tile_size, &tile_size);
@@ -63,7 +66,7 @@ int	main(void)
 	/* put_square(&image, side, i, j); */
 	mlx_put_image_to_window(game.mlx, game.win, image.img, 0, 0);
 	mlx_key_hook(game.win, close_game, &game);
-	mlx_key_hook(game.mlx, key_hook, &game);
+	/* 	mlx_key_hook(game.mlx, key_hook, &game); */
 	/* mlx_loop_hook(game.mlx, render_next_frame, &game); */
 	mlx_loop(game.mlx);
 }
