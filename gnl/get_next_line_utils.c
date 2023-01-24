@@ -6,7 +6,7 @@
 /*   By: ddiniz-m <ddiniz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:48:42 by ddiniz-m          #+#    #+#             */
-/*   Updated: 2023/01/20 15:59:34 by ddiniz-m         ###   ########.fr       */
+/*   Updated: 2023/01/24 12:21:54 by ddiniz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*get_lines(char *line, char *res)
 	int		i;
 
 	i = 0;
-	temp = malloc(sizeof(char) * (ft_strlen(line) + ft_strlen(res) + 1));
+	temp = malloc(sizeof(char) * (ft_strlen(line) + ft_strlen(res)) + 1);
 	while (line && line[i])
 	{
 		temp[i] = line[i];

@@ -6,7 +6,7 @@
 /*   By: ddiniz-m <ddiniz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:48:39 by ddiniz-m          #+#    #+#             */
-/*   Updated: 2023/01/20 15:59:07 by ddiniz-m         ###   ########.fr       */
+/*   Updated: 2023/01/24 11:12:23 by ddiniz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*get_next_line(int fd)
 {
-	static char	res[1];
+	static char	res[2];
 	char *line;
 	
 

@@ -36,5 +36,6 @@ void			put_square(t_image *image, int side, int startx, int starty);
 void			put_pixel(t_image *image, int x, int y, int color);
 int				close_game(int keycode, t_game *game);
 char			**map(char *ber_file);
+int				check_rect_wall(char **map);
 
 #endif

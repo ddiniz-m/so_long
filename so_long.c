@@ -38,30 +38,34 @@ int	main(void)
 {
 	t_game game;
 	/* t_image image; */
+	
 	int x = 0;
 	int y = 0;
 	int i = 0;
 	int j = 0;
 	char **tile_map;
 	int tile_size = 64;
-	int win_sizex = 832;
+	int win_sizex = 512;
 	int win_sizey = 320;
 	char *path_sea = "sprites/sea.xpm";
 	char *path_land = "sprites/land.xpm";
 
+	
+	tile_map = map("test.ber");
+	if (check_rect_wall(tile_map) < 0)
+		return 0;
+
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, win_sizex, win_sizey, "so_long");
-	tile_map = map("test.ber");
-/* 	image.img = mlx_xpm_file_to_image(game.mlx, path_sea, &win_sizex, &win_sizey);
-	image.address = mlx_get_data_addr(image.img, &image.bits, &image.line_len,
-			&image.endian); */
-	/* mlx_put_image_to_window(game.mlx, game.win, image.img, 0, 0); */
+
 	game.tile_img.sea_img = mlx_xpm_file_to_image(game.mlx, path_sea, &tile_size, &tile_size);
 	game.tile_img.land_img = mlx_xpm_file_to_image(game.mlx, path_land, &tile_size, &tile_size);
+
 	while((y <= win_sizey - tile_size))
 	{
 		while(i * tile_size <= win_sizex)
 		{
+
 			if(tile_map[j][i] == '1')
 				mlx_put_image_to_window(game.mlx, game.win, game.tile_img.land_img, x, y);
 			else if (tile_map[j][i] == '0')
@@ -74,12 +78,13 @@ int	main(void)
 		j++;
 		y += tile_size;
 	}
-	printf("i = %d\n", i);
-	printf("j = %d\n", j);
-	printf("x = %d\n", x);
-	printf("y = %d\n", y);
 	mlx_key_hook(game.win, close_game, &game);
 	mlx_loop(game.mlx);
+
+/* 	image.img = mlx_xpm_file_to_image(game.mlx, path_sea, &win_sizex, &win_sizey);
+	image.address = mlx_get_data_addr(image.img, &image.bits, &image.line_len,
+			&image.endian); */
+	/* mlx_put_image_to_window(game.mlx, game.win, image.img, 0, 0); */
 	/* 	mlx_key_hook(game.mlx, key_hook, &game); */
 	/* mlx_loop_hook(game.mlx, render_next_frame, &game); */
 }

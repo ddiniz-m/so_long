@@ -3,6 +3,6 @@
 int close_game(int keycode, t_game *game)
 {
 	if (keycode == 65307)
-		return(mlx_destroy_window(game->mlx, game->win));
+		mlx_destroy_window(game->mlx, game->win);
 	return(0);
 }
