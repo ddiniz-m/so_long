@@ -6,7 +6,7 @@
 /*   By: ddiniz-m <ddiniz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:52:04 by ddiniz-m          #+#    #+#             */
-/*   Updated: 2023/01/24 13:54:15 by ddiniz-m         ###   ########.fr       */
+/*   Updated: 2023/01/25 18:02:46 by ddiniz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,50 @@
 
 int	map_lines(int fd)
 {
-	int			i;
-	static char	buf[1];
+	int		i;
+	int		j;
+	int		k;
+	static char buf[1];
 
-	i = 0;
+	i = 1;
+	j = 0;
+	k = 0;
 	while (read(fd, buf, 1) > 0)
 	{
 		if (*buf == '\n')
 			i++;
+		if (*buf == 'P' || *buf == 'E')
+			j++;
+		if (*buf == 'C')
+			k++;
+		if (*buf != '0' && *buf != '1' && *buf != 'P' && *buf != 'C' && *buf != 'E' 
+			&& *buf != '\n')
+			return (-1);
 	}
-	i++;
+	if (j != 2 || k <= 0)
+		return (-1);
 	return (i);
 }
 
-char	**map(char *ber_file)
+char	**map(t_game *game, char *ber_file)
 {
 	int		i;
 	int		j;
 	int		fd;
-	char	**map;
 
 	j = 0;
 	fd = open(ber_file, O_RDONLY);
 	i = map_lines(fd);
-	map = malloc(sizeof(char *) * (i + 1));
+	if (i < 0)
+		return (NULL);
+	game->tile_map = malloc(sizeof(char *) * (i + 1));
 	fd = open(ber_file, O_RDONLY);
 	while (j <= i)
 	{
-		map[j] = get_next_line(fd);
+		game->tile_map[j] = get_next_line(fd);
 		j++;
 	}
-	return (map);
+	return (game->tile_map);
 }
 
 int	check_rect_wall(char **map)
@@ -73,5 +86,5 @@ int	check_rect_wall(char **map)
 		printf("Error\nMap not rectangular or not surrounded by walls\n");
 		return (-1);
 	}
-	return (0);
+	return (line * col);
 }
