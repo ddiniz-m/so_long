@@ -22,7 +22,9 @@ typedef struct s_tileimg
 	void		*collect_img;
 	void		*player_img;
 	void		*exit_img;
-}				t_tile_img;
+	int			x;
+	int			y;
+}				t_tileimg;
 
 typedef struct s_image
 {
@@ -31,6 +33,8 @@ typedef struct s_image
 	int			bits;
 	int			line_len;
 	int			endian;
+	int			x;
+	int			y;
 }				t_image;
 
 typedef struct s_game
@@ -38,17 +42,19 @@ typedef struct s_game
 	void		*mlx;
 	void		*win;
 	char		**tile_map;
-	t_tile_img	tile_img;
+	t_tileimg	tileimg;
 	t_image		image;
 }				t_game;
 
 void			put_square(t_image *image, int side, int startx, int starty);
 void			put_pixel(t_image *image, int x, int y, int color);
-int				close_game(int keycode, t_game *game);
-char			**map(t_game *game, char *ber_file);
+int				close_game(t_game *game);
+char			**map(char *ber_file);
 int				check_rect_wall(char **map);
 int				map_lines(int fd);
 void			put_tiles(char **map, t_game *game);
-void			open_images(t_game *game);
+int				open_images(t_game *game);
+int				render(t_game *game);
+int				input(int key, t_game *game);
 
 #endif

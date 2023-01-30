@@ -1,7 +1,9 @@
 # - * - Makefile - * -
 
 SRCS = so_long.c gnl/get_next_line.c gnl/get_next_line_utils.c map.c\
-		close_game.c put_tiles.c open_images.c
+		close_game.c put_tiles.c open_images.c put_square.c put_pixel.c\
+		render.c input.c
+		
 OBJS = $(SRCS:%.c=%.o)
 NAME = so_long.a
 CC = gcc

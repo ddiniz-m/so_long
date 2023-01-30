@@ -6,7 +6,7 @@
 /*   By: ddiniz-m <ddiniz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:52:04 by ddiniz-m          #+#    #+#             */
-/*   Updated: 2023/01/25 18:02:46 by ddiniz-m         ###   ########.fr       */
+/*   Updated: 2023/01/30 16:05:26 by ddiniz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	map_lines(int fd)
 	int		i;
 	int		j;
 	int		k;
-	static char buf[1];
+	static char	buf[1];
 
 	i = 1;
 	j = 0;
@@ -39,25 +39,25 @@ int	map_lines(int fd)
 	return (i);
 }
 
-char	**map(t_game *game, char *ber_file)
+char	**map(char *ber_file)
 {
+	t_game game;
 	int		i;
 	int		j;
 	int		fd;
-
 	j = 0;
 	fd = open(ber_file, O_RDONLY);
 	i = map_lines(fd);
 	if (i < 0)
 		return (NULL);
-	game->tile_map = malloc(sizeof(char *) * (i + 1));
+	game.tile_map = malloc(sizeof(char *) * (i + 1));
 	fd = open(ber_file, O_RDONLY);
 	while (j <= i)
 	{
-		game->tile_map[j] = get_next_line(fd);
+		game.tile_map[j] = get_next_line(fd);
 		j++;
 	}
-	return (game->tile_map);
+	return (game.tile_map);
 }
 
 int	check_rect_wall(char **map)
@@ -86,5 +86,5 @@ int	check_rect_wall(char **map)
 		printf("Error\nMap not rectangular or not surrounded by walls\n");
 		return (-1);
 	}
-	return (line * col);
+	return (1);
 }
