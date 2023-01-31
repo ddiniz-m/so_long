@@ -2,10 +2,10 @@
 
 # define SO_LONG_H
 
-# include "ft_printf/ft_printf.h"
+/* # include "ft_printf/ft_printf.h" */
+/* # include "libft/libft.h" */
 # include "gnl/get_next_line.h"
-# include "libft/libft.h"
-# include "mlx_linux/mlx.h"
+# include "../mlx_linux/mlx.h"
 
 # define	path_sea "sprites/sea.xpm"
 # define	path_land "sprites/land.xpm"
@@ -26,6 +26,12 @@ typedef struct s_tileimg
 	int			y;
 }				t_tileimg;
 
+typedef struct s_player
+{
+	int x;
+	int y;
+}				t_player;
+
 typedef struct s_image
 {
 	void		*img;
@@ -33,8 +39,6 @@ typedef struct s_image
 	int			bits;
 	int			line_len;
 	int			endian;
-	int			x;
-	int			y;
 }				t_image;
 
 typedef struct s_game
@@ -44,6 +48,7 @@ typedef struct s_game
 	char		**tile_map;
 	t_tileimg	tileimg;
 	t_image		image;
+	t_player	player;
 }				t_game;
 
 void			put_square(t_image *image, int side, int startx, int starty);
@@ -54,7 +59,10 @@ int				check_rect_wall(char **map);
 int				map_lines(int fd);
 void			put_tiles(char **map, t_game *game);
 int				open_images(t_game *game);
-int				render(t_game *game);
 int				input(int key, t_game *game);
+int				player_move(t_game *game);
+int				render_frames(t_game *game);
+void	ft_lstdelone(va_list *lst, void (*del)(void*));
+void	ft_lstclear(va_list **lst, void (*del)(void *));
 
 #endif

@@ -2,6 +2,7 @@
 
 int	image_to_window(char tile, t_game *game)
 {
+	static int i;
 	if (tile == '1')
 		mlx_put_image_to_window(game->mlx, game->win, game->tileimg.land_img,
 				game->tileimg.x, game->tileimg.y);
@@ -14,9 +15,13 @@ int	image_to_window(char tile, t_game *game)
 	if (tile == 'E')
 		mlx_put_image_to_window(game->mlx, game->win, game->tileimg.exit_img,
 				game->tileimg.x, game->tileimg.y);
-	if (tile == 'P')
-		mlx_put_image_to_window(game->mlx, game->win, game->tileimg.player_img,
-				game->tileimg.x, game->tileimg.y);
+	
+	if (tile == 'P' && i == 0)
+	{
+		i++;
+		game->player.x = game->tileimg.x;
+		game->player.y = game->tileimg.y;
+	}
 	return (0);
 }
 

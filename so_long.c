@@ -8,13 +8,6 @@ int		mlx_key_hook(t_win_list *win, int (*funct)(),void *param);
 int		mlx_loop_hook(void *mlx_ptr, int (*funct_ptr)(), void *param);
 void	*mlx_xpm_file_to_image(t_xvar *xvar,char *file,int *width,int *height); */
 
-int test(t_game *game)
-{
-	put_square(&game->image, 64, game->image.x, game->image.y);
-	mlx_put_image_to_window(game->mlx, game->win, game->image.img, 0, 0);
-	return(0);
-}
-
 int	main(void)
 {
 	t_game game;
@@ -31,16 +24,13 @@ int	main(void)
 		return (0);
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, win_sizex, win_sizey, "so_long");
-	game.image.x = 256;
-	game.image.y = 160;
 
-
-	game.image.img = mlx_new_image(game.mlx, 512, 320);
-	game.image.address = mlx_get_data_addr(game.image.img, &game.image.bits, &game.image.line_len, &game.image.endian);
-
+	/* game.image.img = mlx_new_image(game.mlx, win_sizex, win_sizey);
+	game.image.address = mlx_get_data_addr(game.image.img, &game.image.bits, &game.image.line_len, &game.image.endian); */
+	mlx_hook(game.win, 17, 0, close_game, &game);
 	mlx_hook(game.win, 2, 1L << 0 ,input, &game);
-	mlx_loop_hook(game.mlx, test, &game);
-	/* mlx_loop_hook(game.mlx, render, &game); */
+	mlx_loop_hook(game.mlx, render_frames, &game);
+
 	mlx_loop(game.mlx);
 }
 
