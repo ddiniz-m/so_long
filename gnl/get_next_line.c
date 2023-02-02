@@ -6,7 +6,7 @@
 /*   By: ddiniz-m <ddiniz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:48:39 by ddiniz-m          #+#    #+#             */
-/*   Updated: 2023/01/24 11:12:23 by ddiniz-m         ###   ########.fr       */
+/*   Updated: 2023/02/02 16:27:50 by ddiniz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ char	*get_next_line(int fd)
 	char *line;
 	
 
-	/* if (read(fd, NULL, 1) < 0)
+	if (fd < 0 || read(fd, 0, 0) < 0)
 	{
 		*res = 0;
 		return (NULL);
-	} */
+	}
 	line = NULL;
 	while (read(fd, res, 1) > 0)
 	{

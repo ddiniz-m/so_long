@@ -11,21 +11,15 @@ void	*mlx_xpm_file_to_image(t_xvar *xvar,char *file,int *width,int *height); */
 int	main(void)
 {
 	t_game game;
+	if (errors(&game) < 0)
+		return(0);
+	
 	int win_sizex = 512;
 	int win_sizey = 320;
-
-	game.tile_map = map("test.ber");
-	if (game.tile_map == NULL)
-	{
-		printf("Error\nInvalid/Missing characters\n");
-		return (0);
-	}
-	if (check_rect_wall(game.tile_map) < 0)
-		return (0);
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, win_sizex, win_sizey, "so_long");
 
-	/* game.image.img = mlx_new_image(game.mlx, win_sizex, win_sizey);
+/* 	game.image.img = mlx_new_image(game.mlx, win_sizex, win_sizey);
 	game.image.address = mlx_get_data_addr(game.image.img, &game.image.bits, &game.image.line_len, &game.image.endian); */
 	mlx_hook(game.win, 17, 0, close_game, &game);
 	mlx_hook(game.win, 2, 1L << 0 ,input, &game);
