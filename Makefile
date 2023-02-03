@@ -16,11 +16,18 @@ $(NAME): $(OBJS)
 	@ar -rcs $(NAME) $(OBJS)
 	@$(CC) $(CFLAGS) -g -I ../mlx_linux $(SRCS) -L ../mlx_linux/mlx -lmlx -lXext -lX11 -o $(NAME)
 
-run:
-	@$(CC) $(CFLAGS) -g -I ../mlx_linux $(SRCS) -L ../mlx_linux/mlx -lmlx -lXext -lX11 -o $(NAME) && ./so_long
+map1:
+	@$(CC) $(CFLAGS) -g -I ../mlx_linux $(SRCS) -L ../mlx_linux/mlx -lmlx -lXext -lX11 -o $(NAME) && ./so_long maps/map1.ber
+
+map2:
+	@$(CC) $(CFLAGS) -g -I ../mlx_linux $(SRCS) -L ../mlx_linux/mlx -lmlx -lXext -lX11 -o $(NAME) && ./so_long maps/map2.ber
+
+map3:
+	@$(CC) $(CFLAGS) -g -I ../mlx_linux $(SRCS) -L ../mlx_linux/mlx -lmlx -lXext -lX11 -o $(NAME) && ./so_long maps/map3.ber
 
 val:
-	valgrind --leak-check=full --show-leak-kinds=all ./so_long
+	@$(CC) $(CFLAGS) -g -I ../mlx_linux $(SRCS) -L ../mlx_linux/mlx -lmlx -lXext -lX11 -o $(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all ./so_long maps/map2.ber
 
 clean:
 	@$(RM) $(OBJS)

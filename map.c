@@ -6,21 +6,23 @@
 /*   By: ddiniz-m <ddiniz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:52:04 by ddiniz-m          #+#    #+#             */
-/*   Updated: 2023/02/02 15:29:16 by ddiniz-m         ###   ########.fr       */
+/*   Updated: 2023/02/03 14:56:27 by ddiniz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// line counter and component checker
+// returns -1 if components are not the correct amount
+// returns number of lines
 int	map_lines(int fd, t_game *game)
 {
 	int			j;
-	int			k;
 	static char	buf[1];
 
 	j = 0;
-	k = 0;
 	game->map_y = 1;
+	game->collect = 0;
 	while (read(fd, buf, 1) > 0)
 	{
 		if (*buf == '\n')
@@ -28,24 +30,27 @@ int	map_lines(int fd, t_game *game)
 		if (*buf == 'P' || *buf == 'E')
 			j++;
 		if (*buf == 'C')
-			k++;
+			game->collect++;
 		if (*buf != '0' && *buf != '1' && *buf != 'P' && *buf != 'C'
 			&& *buf != 'E' && *buf != '\n')
 			return (-1);
 	}
-	if (j != 2 || k <= 0)
+	if (j != 2 || game->collect <= 0)
 		return (-1);
 	return (game->map_y);
 }
 
+// .ber to **char converter
+// returns 1 if map_lines return -1
+// returns 2 if malloc fails
 int	map(t_game *game, char *ber_file)
 {
-	int	j;
-	int	i;
-	int	fd;
-	char **buff;
+	int		j;
+	int		i;
+	int		fd;
+	char	**buff;
+
 	buff = NULL;
-	
 	j = 0;
 	fd = open(ber_file, O_RDONLY);
 	i = map_lines(fd, game);
@@ -88,12 +93,10 @@ int	check_rect_wall(t_game *game, char **map)
 	return (1);
 }
 
-int	errors(t_game *game)
+int	errors(t_game *game, char *ber_file)
 {
-	char	*ber_file;
-	int		i;
+	int i;
 
-	ber_file = "test.ber";
 	i = map(game, ber_file);
 	if (i == 1)
 	{
