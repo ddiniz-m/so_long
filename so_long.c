@@ -9,7 +9,6 @@ int	main(int ac, char **av)
 	if (errors(&game, av[1]) < 0)
 		return(0);
 	
-
 	game.win_size_x = game.map_y * tile_size;
 	game.win_size_y = game.map_x * tile_size;
 

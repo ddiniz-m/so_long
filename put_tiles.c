@@ -6,7 +6,7 @@
 /*   By: ddiniz-m <ddiniz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:25:06 by ddiniz-m          #+#    #+#             */
-/*   Updated: 2023/02/03 17:29:50 by ddiniz-m         ###   ########.fr       */
+/*   Updated: 2023/02/07 17:54:43 by ddiniz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,61 +15,64 @@
 //draws images based on respective tile
 int	image_to_window(char tile, t_game *game)
 {
-	if (tile == '1')
-		mlx_put_image_to_window(game->mlx, game->win, game->image.land_img,
-			game->tile.x, game->tile.y);
-	if (tile == '0')
-		mlx_put_image_to_window(game->mlx, game->win, game->image.sea_img,
-			game->tile.x, game->tile.y);
-	if (tile == 'E')
-		mlx_put_image_to_window(game->mlx, game->win, game->image.exit_img,
-			game->tile.x, game->tile.y);
 	if (tile == 'C')
 		tile = collectible_tile(game);
+	if (tile == '1')
+		mlx_put_image_to_window(game->mlx, game->win, game->image.land_img,
+				game->tile.x, game->tile.y);
+	if (tile == '0')
+		mlx_put_image_to_window(game->mlx, game->win, game->image.sea_img,
+				game->tile.x, game->tile.y);
+	if (tile == 'E')
+		mlx_put_image_to_window(game->mlx, game->win, game->image.exit_img,
+				game->tile.x, game->tile.y);
 	if (tile == 'P')
 		player_tile(game);
 	return (0);
 }
 
-// changes collectibles to empty(Sea) when player reaches tile
-// to understand: why || intead of &&
-
+// puts different collectible imgages depending on the number
+// of collectibles that there are
 void	collect_img(int a, int b, t_game *game)
 {
-	if (b == a - 3)
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->image.collect1_img, game->tile.x, game->tile.y);
-	if (b == a - 2)
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->image.collect2_img, game->tile.x, game->tile.y);
-	if (b == a - 1)
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->image.collect3_img, game->tile.x, game->tile.y);
-	if (b == a)
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->image.collect4_img, game->tile.x, game->tile.y);
+	if (b == (a - game->collect_og) + 4)
+		mlx_put_image_to_window(game->mlx, game->win, game->image.collect4_img,
+			game->tile.x, game->tile.y);
+	if (b == (a - game->collect_og) + 3)
+		mlx_put_image_to_window(game->mlx, game->win, game->image.collect3_img,
+			game->tile.x, game->tile.y);
+	if (b == (a - game->collect_og) + 2)
+		mlx_put_image_to_window(game->mlx, game->win, game->image.collect2_img,
+			game->tile.x, game->tile.y);
+	if (b == (a - game->collect_og) + 1)
+		mlx_put_image_to_window(game->mlx, game->win, game->image.collect1_img,
+			game->tile.x, game->tile.y);
+	mlx_put_image_to_window(game->mlx, game->win, game->image.collect5_img,
+			game->tile.x, game->tile.y);
 }
 
+// changes collectibles to empty(Sea) when player reaches tile
+// to understand: why || intead of &&
 char	collectible_tile(t_game *game)
 {
-	static int	i;
-	static int	a = 0;
 	static int	b = 0;
-
+	static int	a = 0;
+	
 	if (b == a)
-		a += 4;
+		a += game->collect_og;
 	if (b != a)
 		b++;
-	if ((game->tile.x != game->player.x || game->tile.y != game->player.y)
-		&& i == 0)
+	if (game->tile.x != game->player.x || game->tile.y != game->player.y)
 	{
 		collect_img(a, b, game);
-		return ('C');
+		return ('.');
 	}
-	mlx_put_image_to_window(game->mlx, game->win, game->image.sea_img,
-		game->tile.x, game->tile.y);
-	i++;
-	return ('0');
+	if (game->tile.x == game->player.x && game->tile.y == game->player.y)
+	{
+		game->tile_map[game->tile.y / 64][game->tile.x / 64] = '0';
+		a -= game->collect_og;
+	}
+	return('.');
 }
 
 void	player_tile(t_game *game)
@@ -85,7 +88,7 @@ void	player_tile(t_game *game)
 	if (i != 0)
 	{
 		mlx_put_image_to_window(game->mlx, game->win, game->image.sea_img,
-			game->tile.x, game->tile.y);
+				game->tile.x, game->tile.y);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: ddiniz-m <ddiniz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:52:04 by ddiniz-m          #+#    #+#             */
-/*   Updated: 2023/02/03 14:56:27 by ddiniz-m         ###   ########.fr       */
+/*   Updated: 2023/02/07 15:31:26 by ddiniz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	map_lines(int fd, t_game *game)
 
 	j = 0;
 	game->map_y = 1;
-	game->collect = 0;
+	game->collect_og = 0;
 	while (read(fd, buf, 1) > 0)
 	{
 		if (*buf == '\n')
@@ -30,12 +30,12 @@ int	map_lines(int fd, t_game *game)
 		if (*buf == 'P' || *buf == 'E')
 			j++;
 		if (*buf == 'C')
-			game->collect++;
+			game->collect_og++;
 		if (*buf != '0' && *buf != '1' && *buf != 'P' && *buf != 'C'
 			&& *buf != 'E' && *buf != '\n')
 			return (-1);
 	}
-	if (j != 2 || game->collect <= 0)
+	if (j != 2 || game->collect_og <= 0)
 		return (-1);
 	return (game->map_y);
 }
@@ -59,12 +59,14 @@ int	map(t_game *game, char *ber_file)
 	buff = malloc(sizeof(char *) * (i + 1));
 	if (!buff)
 		return (2);
+	close(fd);
 	fd = open(ber_file, O_RDONLY);
 	while (j <= i)
 	{
 		buff[j] = get_next_line(fd);
 		j++;
 	}
+	close(fd);
 	game->tile_map = buff;
 	return (0);
 }
