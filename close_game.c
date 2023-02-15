@@ -10,7 +10,8 @@ int close_game(t_game *game)
 	mlx_destroy_image(game->mlx,game->image.collect4_img);
 	mlx_destroy_image(game->mlx,game->image.collect5_img);
 	mlx_destroy_image(game->mlx,game->image.player_img);
-	mlx_destroy_image(game->mlx,game->image.exit_img);
+	mlx_destroy_image(game->mlx,game->image.exit1_img);
+	mlx_destroy_image(game->mlx,game->image.exit2_img);
 	mlx_clear_window(game->mlx, game->win);
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);

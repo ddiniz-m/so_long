@@ -7,16 +7,18 @@
 # include "../mlx_linux/mlx.h"
 # include "gnl/get_next_line.h"
 
-# define path_sea "sprites/Sea.xpm"
-# define path_land "sprites/Land.xpm"
-# define path_collect1 "sprites/Collectible1.xpm"
-# define path_collect2 "sprites/Collectible2.xpm"
-# define path_collect3 "sprites/Collectible3.xpm"
-# define path_collect4 "sprites/Collectible4.xpm"
-# define path_player "sprites/Player.xpm"
-# define path_exit "sprites/Exit.xpm"
+# define PATH_SEA "sprites/Sea.xpm"
+# define PATH_LAND "sprites/Land.xpm"
+# define PATH_COLLECT1 "sprites/Collectible1.xpm"
+# define PATH_COLLECT2 "sprites/Collectible2.xpm"
+# define PATH_COLLECT3 "sprites/Collectible3.xpm"
+# define PATH_COLLECT4 "sprites/Collectible4.xpm"
+# define PATH_COLLECT5 "sprites/Collectible5.xpm"
+# define PATH_PLAYER "sprites/Player.xpm"
+# define PATH_EXIT1 "sprites/Exit.xpm"
+# define PATH_EXIT2 "sprites/Exit2.xpm"
 
-# define tile_size 64
+# define TILE_SIZE 64
 
 /* typedef struct s_type
 {
@@ -56,8 +58,10 @@ typedef struct s_image
 	void		*collect2_img;
 	void		*collect3_img;
 	void		*collect4_img;
+	void		*collect5_img;
 	void		*player_img;
-	void		*exit_img;
+	void		*exit1_img;
+	void		*exit2_img;
 }				t_image;
 
 typedef struct s_game
@@ -70,6 +74,7 @@ typedef struct s_game
 	int			map_x;
 	char		**tile_map;
 	int			collect;
+	int			collect_og;
 	/* t_type		type; */
 	t_tile		tile;
 	t_image		image;
@@ -89,7 +94,8 @@ int				player_move(t_game *game);
 int				render_frames(t_game *game);
 int				errors(t_game *game, char *ber_file);
 void			player_tile(t_game *game);
-char			collectible_tile(t_game *game);
+void			collectible_tile(t_game *game);
 void			collect_img(int a, int b, t_game *game);
+void			exit_tile(t_game *game);
 
 #endif

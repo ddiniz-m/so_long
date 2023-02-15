@@ -6,7 +6,7 @@ SRCS = so_long.c gnl/get_next_line.c gnl/get_next_line_utils.c map.c\
 		
 OBJS = $(SRCS:%.c=%.o)
 NAME = so_long
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
