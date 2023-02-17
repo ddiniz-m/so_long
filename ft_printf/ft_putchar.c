@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_frames.c                                    :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddiniz-m <ddiniz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/31 12:37:13 by ddiniz-m          #+#    #+#             */
-/*   Updated: 2023/02/17 13:49:38 by ddiniz-m         ###   ########.fr       */
+/*   Created: 2022/11/15 10:21:25 by ddiniz-m          #+#    #+#             */
+/*   Updated: 2022/11/16 12:07:38 by ddiniz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "ft_printf.h"
 
-int	player_move(t_game *game)
+int	ft_putchar(char c)
 {
-	mlx_put_image_to_window(game->mlx, game->win, game->image.player_img,
-		game->player.x, game->player.y);
-	return (0);
-}
-int	render_frames(t_game *game)
-{
-	put_tiles(game->tile_map, game);
-	player_move(game);
-	return (0);
+	return (write(1, &c, 1));
 }

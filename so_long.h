@@ -20,23 +20,10 @@
 
 # define TILE_SIZE 64
 
-/* typedef struct s_type
-{
-	void		*Wall;
-	void		*Sea;
-	void		*Exit;
-	void		*Player;
-	void		*Collect;
-}				t_type; */
-
 typedef struct s_tile
 {
 	int			x;
 	int			y;
-	void		*up;
-	void		*down;
-	void		*left;
-	void		*right;
 }				t_tile;
 
 typedef struct s_player
@@ -73,9 +60,9 @@ typedef struct s_game
 	int			map_y;
 	int			map_x;
 	char		**tile_map;
+	char		**map_buff;
 	int			collect;
 	int			collect_og;
-	/* t_type		type; */
 	t_tile		tile;
 	t_image		image;
 	t_player	player;
@@ -85,7 +72,7 @@ void			put_square(t_image *image, int side, int startx, int starty);
 void			put_pixel(t_image *image, int x, int y, int color);
 int				close_game(t_game *game);
 int				map(t_game *game, char *ber_file);
-int				check_rect_wall(t_game *game, char **map);
+int				check_rect_wall(t_game *game);
 int				map_lines(int fd, t_game *game);
 void			put_tiles(char **map, t_game *game);
 int				open_images(t_game *game);
@@ -93,9 +80,12 @@ int				input(int key, t_game *game);
 int				player_move(t_game *game);
 int				render_frames(t_game *game);
 int				errors(t_game *game, char *ber_file);
-void			player_tile(t_game *game);
 void			collectible_tile(t_game *game);
 void			collect_img(int a, int b, t_game *game);
 void			exit_tile(t_game *game);
+void			flood_fill(t_game *game, int x, int y);
+void			player_pos(t_game *game, char ** map, int y, int x);
+void			map_init(t_game *game);
+int			path_check(t_game *game, char **map, int y, int x);
 
 #endif

@@ -1,8 +1,7 @@
 # - * - Makefile - * -
 
 SRCS = so_long.c gnl/get_next_line.c gnl/get_next_line_utils.c map.c\
-		close_game.c put_tiles.c open_images.c input.c render_frames.c\
-		player_move.c
+		close_game.c put_tiles.c open_images.c input.c render_frames.c
 		
 OBJS = $(SRCS:%.c=%.o)
 NAME = so_long

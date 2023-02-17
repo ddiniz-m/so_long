@@ -8,7 +8,10 @@ int	main(int ac, char **av)
 		return(printf("Incorrect amount of arguments"));
 	if (errors(&game, av[1]) < 0)
 		return(0);
-	
+	map_init(&game);
+	if(path_check(&game, game.map_buff, 0, 0) < 0)
+		return(0);
+
 	game.win_size_x = game.map_y * TILE_SIZE;
 	game.win_size_y = game.map_x * TILE_SIZE;
 
