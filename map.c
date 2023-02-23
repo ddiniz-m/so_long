@@ -6,7 +6,7 @@
 /*   By: ddiniz-m <ddiniz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:52:04 by ddiniz-m          #+#    #+#             */
-/*   Updated: 2023/02/17 18:30:27 by ddiniz-m         ###   ########.fr       */
+/*   Updated: 2023/02/23 13:34:36 by ddiniz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,26 +67,23 @@ int	map(t_game *game, char *ber_file)
 	return (0);
 }
 
-int	check_rect_wall(t_game *game)
+int	check_rect_wall(t_game *game, char **map)
 {
-	int	line;
-	int	col;
-
-	game->map_y = 0;
-	game->map_x = 0;
-	while (game->tile_map[0][game->map_y] == '1')
-		game->map_y++;
-	while (game->tile_map[game->map_x] && game->tile_map[game->map_x][0] == '1')
-		game->map_x++;
-	line = game->map_y;
-	col = game->map_x;
-	game->map_y = 0;
-	game->map_x = 0;
-	while (game->tile_map[col - 1][game->map_y] == '1')
-		game->map_y++;
-	while (game->tile_map[game->map_x] && game->tile_map[game->map_x][line - 1] == '1')
-		game->map_x++;
-	if (game->map_y != line || game->map_x != col)
+	int	line = 0;
+	int	col = 0;
+	while (map[0][col] == '1')
+		col++;
+	while (map[line] && map[line][0] == '1')
+		line++;
+	game->map_y = line;
+	game->map_x = col;
+	line = 0;
+	col = 0;
+	while (map[game->map_y - 1][col] == '1')
+		col++;
+	while (map && map[line] && map[line][game->map_x - 1] == '1')
+		line++;
+	if (line != game->map_y || col != game->map_x)
 		return (-1);
 	return (1);
 }
@@ -118,7 +115,7 @@ int	path_check(t_game *game, char **map, int y, int x)
 		{
 			if (map[y][x] == 'C' || map[y][x] == 'E')
 			{
-				printf("Error\nNo path available to exit or collectible\n");
+				ft_printf("Error\nNo path available to exit or collectible\n");
 				return(-1);
 			}
 			x++;
@@ -129,81 +126,71 @@ int	path_check(t_game *game, char **map, int y, int x)
 	return(0);
 }
 
-
-void	flood_fill(t_game *game, int x, int y)
+void	flood_fill(t_game *game, char **map, int x, int y)
 {
-	if (game->map_buff[y][x] == '1' || y < 0 || y >= game->map_x || x < 0
-		|| game->tile.x >= game->map_y)
+	if (map[y][x] == '1' || y < 0 || y >= game->map_y || x < 0
+		|| x >= game->map_x)
 		return ;
-	if (game->map_buff[y][x] == '0' || game->map_buff[y][x] == 'C'
-		|| game->map_buff[y][x] == 'P' || game->map_buff[y][x] == 'E')
+	if (map[y][x] == '0' || map[y][x] == 'C'
+		|| map[y][x] == 'P' || map[y][x] == 'E')
 	{
-		if (game->map_buff[y][x] == '0')
-			game->map_buff[y][x] = 'o';
-		if (game->map_buff[y][x] == 'C')
-			game->map_buff[y][x] = 'c';
-		if (game->map_buff[y][x] == 'E')
-			game->map_buff[y][x] = 'e';
-		if (game->map_buff[y][x] == 'P')
-			game->map_buff[y][x] = 'p';
-		flood_fill(game, x + 1, y);
-		flood_fill(game, x - 1, y);
-		flood_fill(game, x, y + 1);
-		flood_fill(game, x, y - 1);
+		if (map[y][x] == '0')
+			map[y][x] = 'o';
+		if (map[y][x] == 'C')
+			map[y][x] = 'c';
+		if (map[y][x] == 'E')
+			map[y][x] = 'e';
+		if (map[y][x] == 'P')
+			map[y][x] = 'p';
+		flood_fill(game, map, x + 1, y);
+		flood_fill(game, map, x - 1, y);
+		flood_fill(game, map, x, y + 1);
+		flood_fill(game, map, x, y - 1);
 	}
 }
 
-void	map_init(t_game *game)
+int	map_init(t_game *game)
 {
 	int		i;
 
 	i = 0;
 	player_pos(game, game->tile_map, 0, 0);
-	game->map_buff = malloc(sizeof(char *) * (game->map_x + 1));
-	while (i < game->map_x)
+	game->map_buff = NULL;
+	game->map_buff = malloc(sizeof(char *) * (game->map_y + 1));
+	while (i < game->map_y)
 	{
-		game->map_buff[i] = malloc(sizeof(char) * (strlen(game->tile_map[i]) + 1));
-		strcpy(game->map_buff[i], game->tile_map[i]);
+		game->map_buff[i] = malloc(sizeof(char) * (ft_strlen(game->tile_map[i]) + 1));
+		ft_strcpy(game->map_buff[i], game->tile_map[i]);
 		i++;
 	}
-	flood_fill(game, game->player.x / 64, game->player.y / 64);
-	/* i = 0;
-	while (1)
+	flood_fill(game, game->map_buff, game->player.x / 64, game->player.y / 64);
+	if(path_check(game, game->map_buff, 0, 0) < 0)
 	{
-		if (game->tile_map[i] == NULL)
-			break ;
-		printf("tile_map %i = %s", i, game->tile_map[i]);
-		i++;
+		ft_free(game, game->map_buff);
+		return(-1);
 	}
-	i = 0;
-	printf("\n\n");
-	while (1)
-	{
-		if (game->map_buff[i] == NULL)
-			break ;
-		printf("map_buff %i = %s", i, game->map_buff[i]);
-		i++;
-	} */
+	ft_free(game, game->map_buff);
+	return(0);
 }
 
 int	errors(t_game *game, char *ber_file)
 {
 	int	i;
-
+	
 	i = map(game, ber_file);
 	if (i == 1)
 	{
-		printf("Error\nMap doesn't contain the correct components\n");
+		ft_printf("Error\nMap doesn't contain the correct components\n");
 		return (-1);
 	}
 	if (i == -1)
 	{
-		printf("Error\nMap memory allocation error\n");
+		ft_printf("Error\nMap memory allocation error\n");
 		return (-1);
 	}
-	if (check_rect_wall(game) < 0)
+	if (check_rect_wall(game, game->tile_map) < 0)
 	{
-		printf("Error\nMap not rectangular or not surrounded by walls\n");
+		ft_printf("Error\nMap not rectangular or not surrounded by walls\n");
 		return (-1);
 	}
 	return (0);

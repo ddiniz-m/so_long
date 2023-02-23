@@ -2,10 +2,10 @@
 
 # define SO_LONG_H
 
-/* # include "ft_printf/ft_printf.h" */
-/* # include "libft/libft.h" */
 # include "../mlx_linux/mlx.h"
+# include "libft/libft.h"
 # include "gnl/get_next_line.h"
+# include "ft_printf/ft_printf.h"
 
 # define PATH_SEA "sprites/Sea.xpm"
 # define PATH_LAND "sprites/Land.xpm"
@@ -34,11 +34,6 @@ typedef struct s_player
 
 typedef struct s_image
 {
-	/*void		*img;
-	char		*address;
-	int			bits;
-	int			line_len;
-	int			endian; */
 	void		*sea_img;
 	void		*land_img;
 	void		*collect1_img;
@@ -68,11 +63,12 @@ typedef struct s_game
 	t_player	player;
 }				t_game;
 
+// ------------------------------  SO LONG ---------------------------------
 void			put_square(t_image *image, int side, int startx, int starty);
 void			put_pixel(t_image *image, int x, int y, int color);
 int				close_game(t_game *game);
 int				map(t_game *game, char *ber_file);
-int				check_rect_wall(t_game *game);
+int				check_rect_wall(t_game *game, char **map);
 int				map_lines(int fd, t_game *game);
 void			put_tiles(char **map, t_game *game);
 int				open_images(t_game *game);
@@ -83,9 +79,12 @@ int				errors(t_game *game, char *ber_file);
 void			collectible_tile(t_game *game);
 void			collect_img(int a, int b, t_game *game);
 void			exit_tile(t_game *game);
-void			flood_fill(t_game *game, int x, int y);
+void			flood_fill(t_game *game, char **map, int x, int y);
 void			player_pos(t_game *game, char ** map, int y, int x);
-void			map_init(t_game *game);
-int			path_check(t_game *game, char **map, int y, int x);
-
+int				map_init(t_game *game);
+int				path_check(t_game *game, char **map, int y, int x);
+void			ft_free(t_game*game, char **map);
+// ------------------------------  LIBFT---------------------------------
+// ------------------------------  PRINTF---------------------------------
+// ------------------------------  GNL---------------------------------
 #endif

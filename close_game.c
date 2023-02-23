@@ -15,9 +15,8 @@ int close_game(t_game *game)
 	mlx_clear_window(game->mlx, game->win);
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
-	free(game->tile_map);
+	ft_free(game, game->tile_map);
 	free(game->mlx);
-	exit(1);
-	get_next_line(-1);
+	exit(0);
 	return(0);
 }

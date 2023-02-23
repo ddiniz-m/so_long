@@ -6,13 +6,13 @@
 /*   By: ddiniz-m <ddiniz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:48:42 by ddiniz-m          #+#    #+#             */
-/*   Updated: 2023/02/15 16:42:31 by ddiniz-m         ###   ########.fr       */
+/*   Updated: 2023/02/23 13:53:02 by ddiniz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(char *str)
+int	gnl_strlen(char *str)
 {
 	int	i;
 
@@ -32,7 +32,7 @@ char	*get_lines(char *line, char res)
 	int		i;
 
 	i = 0;
-	temp = malloc(sizeof(char) * (ft_strlen(line) + 2));
+	temp = malloc(sizeof(char) * (gnl_strlen(line) + 2));
 	while (line && line[i])
 	{
 		temp[i] = line[i];
