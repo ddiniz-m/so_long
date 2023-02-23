@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_frames.c                                    :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddiniz-m <ddiniz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/31 12:37:13 by ddiniz-m          #+#    #+#             */
-/*   Updated: 2023/02/23 17:08:55 by ddiniz-m         ###   ########.fr       */
+/*   Created: 2022/10/26 14:23:45 by ddiniz-m          #+#    #+#             */
+/*   Updated: 2023/02/23 17:00:57 by ddiniz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
-int	player_move(t_game *game)
+char	*ft_strchr(const char *s, int c)
 {
-	mlx_put_image_to_window(game->mlx, game->win, game->image.player_img,
-		game->player.x, game->player.y);
+	int	i;
+
+	i = 0;
+	while (s[i] != (char)c && s[i] != '\0')
+		i++;
+	if (s[i] == (char)c)
+		return ((char *)s + i);
 	return (0);
 }
 
-int	render_frames(t_game *game)
+/* #include<stdio.h>
+int main()
 {
-	put_tiles(game->tile_map, game);
-	player_move(game);
-	return (0);
-}
+	char str[] = "tripouille";
+	printf("%s", ft_strchr(str, 't' + 256));
+} */

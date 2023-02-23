@@ -1,11 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ddiniz-m <ddiniz-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/23 16:45:59 by ddiniz-m          #+#    #+#             */
+/*   Updated: 2023/02/23 19:33:09 by ddiniz-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 
 # define SO_LONG_H
 
-/* # include "ft_printf/ft_printf.h" */
-/* # include "libft/libft.h" */
 # include "../mlx_linux/mlx.h"
-# include "gnl/get_next_line.h"
+# include <stdarg.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <unistd.h>
 
 # define PATH_SEA "sprites/Sea.xpm"
 # define PATH_LAND "sprites/Land.xpm"
@@ -34,11 +51,6 @@ typedef struct s_player
 
 typedef struct s_image
 {
-	/*void		*img;
-	char		*address;
-	int			bits;
-	int			line_len;
-	int			endian; */
 	void		*sea_img;
 	void		*land_img;
 	void		*collect1_img;
@@ -68,24 +80,31 @@ typedef struct s_game
 	t_player	player;
 }				t_game;
 
-void			put_square(t_image *image, int side, int startx, int starty);
-void			put_pixel(t_image *image, int x, int y, int color);
+// ------------------------------  SO LONG -------------------------------
 int				close_game(t_game *game);
-int				map(t_game *game, char *ber_file);
-int				check_rect_wall(t_game *game);
-int				map_lines(int fd, t_game *game);
 void			put_tiles(char **map, t_game *game);
 int				open_images(t_game *game);
 int				input(int key, t_game *game);
-int				player_move(t_game *game);
 int				render_frames(t_game *game);
 int				errors(t_game *game, char *ber_file);
-void			collectible_tile(t_game *game);
-void			collect_img(int a, int b, t_game *game);
-void			exit_tile(t_game *game);
-void			flood_fill(t_game *game, int x, int y);
-void			player_pos(t_game *game, char ** map, int y, int x);
-void			map_init(t_game *game);
-int			path_check(t_game *game, char **map, int y, int x);
+int				map_init(t_game *game);
+void			ft_free(t_game*game, char **map);
+// ------------------------------  LIBFT----------------------------------
+char			*ft_strchr(const char *s, int c);
+char			*ft_strcpy(char *dest, char *src);
+int				ft_strlen(char *str);
+char			*ft_strstr(char *str, char *to_find);
+// ------------------------------FT_PRINTF--------------------------------
+int				ft_printf(const char *str, ...);
+int				ft_puthexa(unsigned long long nbr,
+					unsigned long long base, int i);
+int				ft_check(char str, va_list args);
+int				ft_putstr(char *str);
+int				ft_putchar(char c);
+int				ft_putnbr(int nb);
+int				ft_putptr(unsigned long nbr);
+// ---------------------------------GNL-----------------------------------
+char			*get_next_line(int fd);
+char			*get_lines(char *line, char res);
 
 #endif

@@ -6,20 +6,18 @@
 /*   By: ddiniz-m <ddiniz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:25:06 by ddiniz-m          #+#    #+#             */
-/*   Updated: 2023/02/17 15:31:11 by ddiniz-m         ###   ########.fr       */
+/*   Updated: 2023/02/23 18:38:21 by ddiniz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-//draws images based on respective tile
-
 // puts different collectible imgages depending on the number
 // of collectibles that there are
 void	collect_img(int a, int b, t_game *game)
 {
-	static int i;
-	
+	static int	i;
+
 	if (b == (a - game->collect_og) + 1)
 		mlx_put_image_to_window(game->mlx, game->win, game->image.collect1_img,
 			game->tile.x, game->tile.y);
@@ -43,12 +41,11 @@ void	collect_img(int a, int b, t_game *game)
 }
 
 // changes collectibles to empty(Sea) when player reaches tile
-// to understand: why || intead of &&
 void	collectible_tile(t_game *game)
 {
 	static int	b = 0;
 	static int	a = 0;
-	
+
 	if (b == a)
 		a += game->collect_og;
 	if (b != a)
