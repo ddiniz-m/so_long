@@ -6,7 +6,7 @@
 /*   By: ddiniz-m <ddiniz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:25:06 by ddiniz-m          #+#    #+#             */
-/*   Updated: 2023/02/23 18:38:21 by ddiniz-m         ###   ########.fr       */
+/*   Updated: 2023/02/24 16:53:48 by ddiniz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@ void	collect_img(int a, int b, t_game *game)
 	static int	i;
 
 	if (b == (a - game->collect_og) + 1)
-		mlx_put_image_to_window(game->mlx, game->win, game->image.collect1_img,
+		mlx_put_image_to_window(game->mlx, game->win, game->image.zoro_img,
 			game->tile.x, game->tile.y);
 	if (b == (a - game->collect_og) + 2)
-		mlx_put_image_to_window(game->mlx, game->win, game->image.collect2_img,
+		mlx_put_image_to_window(game->mlx, game->win, game->image.nami_img,
 			game->tile.x, game->tile.y);
 	if (b == (a - game->collect_og) + 3)
-		mlx_put_image_to_window(game->mlx, game->win, game->image.collect3_img,
+		mlx_put_image_to_window(game->mlx, game->win, game->image.usopp_img,
 			game->tile.x, game->tile.y);
 	if (b == (a - game->collect_og) + 4)
-		mlx_put_image_to_window(game->mlx, game->win, game->image.collect4_img,
+		mlx_put_image_to_window(game->mlx, game->win, game->image.sanji_img,
 			game->tile.x, game->tile.y);
 	if (i == 0)
 		i = 5;
 	if (b == (a - game->collect_og) + i)
 	{
-		mlx_put_image_to_window(game->mlx, game->win, game->image.collect5_img,
+		mlx_put_image_to_window(game->mlx, game->win, game->image.meat_img,
 			game->tile.x, game->tile.y);
 		i++;
 	}
@@ -77,7 +77,7 @@ void	exit_tile(t_game *game)
 int	image_to_window(char tile, t_game *game)
 {
 	if (tile == '1')
-		mlx_put_image_to_window(game->mlx, game->win, game->image.land_img,
+		mlx_put_image_to_window(game->mlx, game->win, game->image.wall_img,
 			game->tile.x, game->tile.y);
 	if (tile == '0')
 		mlx_put_image_to_window(game->mlx, game->win, game->image.sea_img,

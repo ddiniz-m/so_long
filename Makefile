@@ -12,7 +12,7 @@ SRCS = so_long.c map_init.c close_game.c put_tiles.c open_images.c input.c rende
 
 OBJS = $(SRCS:%.c=%.o)
 NAME = so_long
-CC = cc
+CC = @cc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
@@ -21,16 +21,18 @@ RM = rm -rf
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) -I ../mlx_linux $(SRCS) -L ../mlx_linux/mlx -lmlx -lXext -lX11 -o $(NAME)
+	@$(CC) $(CFLAGS) -g -I ../mlx_linux $(SRCS) -L ../mlx_linux/mlx -lmlx -lXext -lX11 -o $(NAME)
 
 map1:
-	@$(CC) $(CFLAGS) -I ../mlx_linux $(SRCS) -L ../mlx_linux/mlx -lmlx -lXext -lX11 -o $(NAME)
+	@$(CC) $(CFLAGS) -g -I ../mlx_linux $(SRCS) -L ../mlx_linux/mlx -lmlx -lXext -lX11 -o $(NAME)
 	@./so_long maps/map1.ber
 
 map2: $(NAME)
+	@$(CC) $(CFLAGS) -g -I ../mlx_linux $(SRCS) -L ../mlx_linux/mlx -lmlx -lXext -lX11 -o $(NAME)
 	@./so_long maps/map2.ber
 
 map3: $(NAME)
+	@$(CC) $(CFLAGS) -g -I ../mlx_linux $(SRCS) -L ../mlx_linux/mlx -lmlx -lXext -lX11 -o $(NAME)
 	@./so_long maps/map3.ber
 
 val:
@@ -44,4 +46,4 @@ fclean: clean
 
 re: fclean $(NAME)
 
-.PHONY: all clean fclean run re
+.PHONY: all clean fclean run re map1 map2 map3 val

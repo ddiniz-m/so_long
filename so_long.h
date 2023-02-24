@@ -6,7 +6,7 @@
 /*   By: ddiniz-m <ddiniz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:45:59 by ddiniz-m          #+#    #+#             */
-/*   Updated: 2023/02/23 19:33:09 by ddiniz-m         ###   ########.fr       */
+/*   Updated: 2023/02/24 17:55:53 by ddiniz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@
 # include <sys/types.h>
 # include <unistd.h>
 
-# define PATH_SEA "sprites/Sea.xpm"
-# define PATH_LAND "sprites/Land.xpm"
-# define PATH_COLLECT1 "sprites/Collectible1.xpm"
-# define PATH_COLLECT2 "sprites/Collectible2.xpm"
-# define PATH_COLLECT3 "sprites/Collectible3.xpm"
-# define PATH_COLLECT4 "sprites/Collectible4.xpm"
-# define PATH_COLLECT5 "sprites/Collectible5.xpm"
-# define PATH_PLAYER "sprites/Player.xpm"
-# define PATH_EXIT1 "sprites/Exit.xpm"
-# define PATH_EXIT2 "sprites/Exit2.xpm"
+# define PATH_SEA "sprites/sea.xpm"
+# define PATH_WALL "sprites/wall.xpm"
+# define PATH_ZORO "sprites/zoro.xpm"
+# define PATH_NAMI "sprites/nami.xpm"
+# define PATH_USOPP "sprites/usopp.xpm"
+# define PATH_SANJI "sprites/sanji.xpm"
+# define PATH_MEAT "sprites/meat.xpm"
+# define PATH_LUFFY "sprites/luffy.xpm"
+# define PATH_EXIT1 "sprites/exit1.xpm"
+# define PATH_EXIT2 "sprites/exit2.xpm"
 
 # define TILE_SIZE 64
 
@@ -52,13 +52,13 @@ typedef struct s_player
 typedef struct s_image
 {
 	void		*sea_img;
-	void		*land_img;
-	void		*collect1_img;
-	void		*collect2_img;
-	void		*collect3_img;
-	void		*collect4_img;
-	void		*collect5_img;
-	void		*player_img;
+	void		*wall_img;
+	void		*zoro_img;
+	void		*nami_img;
+	void		*usopp_img;
+	void		*sanji_img;
+	void		*meat_img;
+	void		*luffy_img;
 	void		*exit1_img;
 	void		*exit2_img;
 }				t_image;

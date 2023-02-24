@@ -6,7 +6,7 @@
 /*   By: ddiniz-m <ddiniz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:52:04 by ddiniz-m          #+#    #+#             */
-/*   Updated: 2023/02/23 19:38:10 by ddiniz-m         ###   ########.fr       */
+/*   Updated: 2023/02/24 18:38:26 by ddiniz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,14 @@ void	flood_fill(t_game *game, char **map, int x, int y)
 	}
 }
 
-int	path_check(t_game *game, char **map, int y, int x)
+int	path_check(t_game *game, char **map)
 {
-	while (map[y] && y < game->map_y && x < game->map_x)
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (y < game->map_y && x < game->map_x)
 	{
 		while (map[y][x])
 		{
@@ -93,7 +98,7 @@ int	map_init(t_game *game)
 		i++;
 	}
 	flood_fill(game, game->map_buff, game->player.x / 64, game->player.y / 64);
-	if (path_check(game, game->map_buff, 0, 0) < 0)
+	if (path_check(game, game->map_buff) < 0)
 	{
 		ft_free(game, game->map_buff);
 		return (-1);

@@ -6,7 +6,7 @@
 /*   By: ddiniz-m <ddiniz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:37:55 by ddiniz-m          #+#    #+#             */
-/*   Updated: 2023/02/15 18:40:08 by ddiniz-m         ###   ########.fr       */
+/*   Updated: 2023/02/24 18:37:09 by ddiniz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,20 @@ int	open_images(t_game *game)
 	size = TILE_SIZE;
 	game->image.sea_img = mlx_xpm_file_to_image(game->mlx, PATH_SEA, &size,
 			&size);
-	game->image.land_img = mlx_xpm_file_to_image(game->mlx, PATH_LAND, &size,
+	game->image.wall_img = mlx_xpm_file_to_image(game->mlx, PATH_WALL, &size,
 			&size);
-	game->image.collect1_img = mlx_xpm_file_to_image(game->mlx, PATH_COLLECT1,
-			&size, &size);
-	game->image.collect2_img = mlx_xpm_file_to_image(game->mlx, PATH_COLLECT2,
-			&size, &size);
-	game->image.collect3_img = mlx_xpm_file_to_image(game->mlx, PATH_COLLECT3,
-			&size, &size);
-	game->image.collect4_img = mlx_xpm_file_to_image(game->mlx, PATH_COLLECT4,
-			&size, &size);
-	game->image.collect5_img = mlx_xpm_file_to_image(game->mlx, PATH_COLLECT5,
-			&size, &size);
-	game->image.player_img = mlx_xpm_file_to_image(game->mlx, PATH_PLAYER,
-			&size, &size);
+	game->image.zoro_img = mlx_xpm_file_to_image(game->mlx, PATH_ZORO, &size,
+			&size);
+	game->image.nami_img = mlx_xpm_file_to_image(game->mlx, PATH_NAMI, &size,
+			&size);
+	game->image.usopp_img = mlx_xpm_file_to_image(game->mlx, PATH_USOPP, &size,
+			&size);
+	game->image.sanji_img = mlx_xpm_file_to_image(game->mlx, PATH_SANJI, &size,
+			&size);
+	game->image.meat_img = mlx_xpm_file_to_image(game->mlx, PATH_MEAT, &size,
+			&size);
+	game->image.luffy_img = mlx_xpm_file_to_image(game->mlx, PATH_LUFFY, &size,
+			&size);
 	game->image.exit1_img = mlx_xpm_file_to_image(game->mlx, PATH_EXIT1, &size,
 			&size);
 	game->image.exit2_img = mlx_xpm_file_to_image(game->mlx, PATH_EXIT2, &size,
