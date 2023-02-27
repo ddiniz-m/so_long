@@ -6,7 +6,7 @@
 /*   By: ddiniz-m <ddiniz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:29:44 by ddiniz-m          #+#    #+#             */
-/*   Updated: 2023/02/23 16:41:38 by ddiniz-m         ###   ########.fr       */
+/*   Updated: 2023/02/27 16:51:07 by ddiniz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int	map(t_game *game, char *ber_file)
 	if (i < 0)
 		return (1);
 	game->tile_map = malloc(sizeof(char *) * (i + 1));
+	if (!game->tile_map)
+		return (-1);
 	close(fd);
 	fd = open(ber_file, O_RDONLY);
 	while (j < i)
@@ -67,7 +69,29 @@ int	map(t_game *game, char *ber_file)
 	return (0);
 }
 
-int	check_rect_wall(t_game *game, char **map)
+int	check_rect(t_game *game, char **map)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (map[y])
+	{
+		while (map[y][x + 1] != '\n' && map[y][x + 1] != '\0')
+			x++;
+		if (x != game->map_x - 1)
+			return (-1);
+		x = 0;
+		y++;
+	}
+	if (y != game->map_y)
+		return (-1);
+	return (0);
+}
+
+// checks if map is rectangular and surrounded by '1'
+int	check_wall(t_game *game, char **map)
 {
 	int	line;
 	int	col;
@@ -82,10 +106,10 @@ int	check_rect_wall(t_game *game, char **map)
 	game->map_x = col;
 	line = 0;
 	col = 0;
-	while (map[game->map_y - 1][col] == '1')
-		col++;
-	while (map && map[line] && map[line][game->map_x - 1] == '1')
+	while (map[line] && game->map_x > 0 && map[line][game->map_x - 1] == '1')
 		line++;
+	while (game->map_y > 0 && map[game->map_y - 1][col] == '1')
+		col++;
 	if (line != game->map_y || col != game->map_x)
 		return (-1);
 	return (1);
@@ -106,9 +130,14 @@ int	errors(t_game *game, char *ber_file)
 		ft_printf("Error\nMap memory allocation error\n");
 		return (-1);
 	}
-	if (check_rect_wall(game, game->tile_map) < 0)
+	if (check_wall(game, game->tile_map) < 0)
 	{
-		ft_printf("Error\nMap not rectangular or not surrounded by walls\n");
+		ft_printf("Error\nMap not surrounded by walls\n");
+		return (-1);
+	}
+	if (check_rect(game, game->tile_map) < 0)
+	{
+		ft_printf("Error\nMap not a rectangle\n");
 		return (-1);
 	}
 	return (0);
