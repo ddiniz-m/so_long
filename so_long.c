@@ -6,7 +6,7 @@
 /*   By: ddiniz-m <ddiniz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:30:19 by ddiniz-m          #+#    #+#             */
-/*   Updated: 2023/02/24 18:38:41 by ddiniz-m         ###   ########.fr       */
+/*   Updated: 2023/02/27 13:42:03 by ddiniz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	main(int ac, char **av)
 	if (map_init(&game) < 0)
 		return (0);
 	game.collect = 0;
-	game.win_size_x = game.map_x * TILE_SIZE;
 	game.win_size_y = game.map_y * TILE_SIZE;
+	game.win_size_x = game.map_x * TILE_SIZE;
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, game.win_size_x,
 			game.win_size_y, "so_long");

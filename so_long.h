@@ -6,7 +6,7 @@
 /*   By: ddiniz-m <ddiniz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:45:59 by ddiniz-m          #+#    #+#             */
-/*   Updated: 2023/02/24 17:55:53 by ddiniz-m         ###   ########.fr       */
+/*   Updated: 2023/02/27 16:55:19 by ddiniz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 # define SO_LONG_H
 
-# include "../mlx_linux/mlx.h"
+# include "mlx_linux/mlx.h"
 # include <stdarg.h>
 # include <fcntl.h>
 # include <stdio.h>

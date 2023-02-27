@@ -16,26 +16,21 @@ CC = @cc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
-.SILENT: $(NAME)
-
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) -g -I ../mlx_linux $(SRCS) -L ../mlx_linux/mlx -lmlx -lXext -lX11 -o $(NAME)
+	@$(CC) $(CFLAGS) -g -I ./mlx_linux $(SRCS) -L ./mlx_linux -lmlx -lXext -lX11 -o $(NAME)
 
-map1:
-	@$(CC) $(CFLAGS) -g -I ../mlx_linux $(SRCS) -L ../mlx_linux/mlx -lmlx -lXext -lX11 -o $(NAME)
+map1: $(NAME)
 	@./so_long maps/map1.ber
 
 map2: $(NAME)
-	@$(CC) $(CFLAGS) -g -I ../mlx_linux $(SRCS) -L ../mlx_linux/mlx -lmlx -lXext -lX11 -o $(NAME)
 	@./so_long maps/map2.ber
 
 map3: $(NAME)
-	@$(CC) $(CFLAGS) -g -I ../mlx_linux $(SRCS) -L ../mlx_linux/mlx -lmlx -lXext -lX11 -o $(NAME)
 	@./so_long maps/map3.ber
 
-val:
+val: $(NAME)
 	@valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./so_long maps/map1.ber
 
 clean:

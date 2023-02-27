@@ -6,7 +6,7 @@
 /*   By: ddiniz-m <ddiniz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:52:04 by ddiniz-m          #+#    #+#             */
-/*   Updated: 2023/02/24 18:38:26 by ddiniz-m         ###   ########.fr       */
+/*   Updated: 2023/02/27 13:32:20 by ddiniz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	player_pos(t_game *game, char **map, int y, int x)
 {
-	while (map[y] && y < game->map_y && x < game->map_x)
+	while (y < game->map_y && x < game->map_x)
 	{
 		while (map[y][x])
 		{
@@ -92,8 +92,6 @@ int	map_init(t_game *game)
 	{
 		game->map_buff[i] = malloc(sizeof(char) * (
 					ft_strlen(game->tile_map[i]) + 1));
-		if (!game->map_buff[i])
-			return (0);
 		ft_strcpy(game->map_buff[i], game->tile_map[i]);
 		i++;
 	}

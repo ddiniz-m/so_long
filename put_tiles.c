@@ -6,7 +6,7 @@
 /*   By: ddiniz-m <ddiniz-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:25:06 by ddiniz-m          #+#    #+#             */
-/*   Updated: 2023/02/24 16:53:48 by ddiniz-m         ###   ########.fr       */
+/*   Updated: 2023/02/27 13:45:43 by ddiniz-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	put_tiles(char **map, t_game *game)
 	while ((game->tile.y <= game->win_size_y - TILE_SIZE))
 	{
 		game->tile.x = 0;
-		while (i * TILE_SIZE <= game->win_size_x)
+		while (game->tile.x <= game->win_size_x - TILE_SIZE)
 		{
 			image_to_window(map[j][i], game);
 			game->tile.x += TILE_SIZE;
